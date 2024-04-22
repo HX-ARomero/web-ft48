@@ -14,7 +14,10 @@
 
 ## 01 - Backend Architecture
 
-[Link](./XpertReadmes/NestJS-01.md)
+- [Link](./XpertReadmes/NestJS-01.md)
+- [Status Code - Cats](https://http.cat/)
+- [Status Code - Dogs](https://http.dog/)
+- [LucidChart - Crear Diagrama Entigad Relación](https://www.lucidchart.com)
 
 ## 02 - Nest JS Fundamentals I
 
