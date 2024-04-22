@@ -2,9 +2,46 @@
 
 [Volver a Inicio](../README.md)
 
+## NIVELES DE ABSTRACCIÓN
+
+- Al utilizar la programación para resolver problemas de la vida real, representamos a las entidades y funcionalidades en código, a esto llamamos abstracción.
+
+- Recordemos que un **servicio**, en términos generales, es una unidad lógica, independiente y reutilizable que desempeña una tarea específica. Además, pueden constar de múltiples clases y módulos según las necesidades.
+
+- Cada uno de estos niveles de abstracción desempeñan un papel crucial en la creación de software escalable y mantenible:
+- Las clases definen entidades y comportamientos
+- Los módulos organizan el código en unidades lógicas
+- Los servicios permiten la construcción de sistemas mas complejos
+
+## MONOLITO
+
+- Es el patrón de arquitectura que utilizamos hasta ahora, toda la aplicación es una única unidad funcional de software.
+- Ventajas de la Arquitectura Monolítica
+  - Es sencilla de implementar, ya que contiene toda la lógica unificada.
+  - Facilidad para realizar Tests Unitarios y End-to-end
+  - Facilidad de depuración
+- Desventajas de la Arquitectura Monolítica
+  - Aplicaciones complejas de escalar y mantener
+  - Gran costo de hardware
+  - No permite diversidad en las tecnologías utilizadas
+
+## MICROSERVICIOS
+
+- En este patrón de arquitectura, la aplicación se compondrá de múltiples Microservicios, cada uno con una responsabilidad única, bien definida e independiente del resto.
+- Ventajas de Microservicios:
+  - Aislar las bases de datos, permitiendo incluso utilizar múltiples tipos (relacionales y no relacionales).
+  - Utilizar Microservicios escritos en otro lenguaje, aunque puede ser mas costoso.
+  - Posibilidad de migrar proyecto en etapas (por microservicios).
+  - Posibilidad de desarrollo en paralelo.
+- Desventaja de los Microservicios:
+  - Mayor dificultad de implementación
+  - Mayor complejidad para realizar Testing y Depuración
+  - Mayores costos operativos en cuanto a recursos humanos (capacidad técnica)
+  - Mayores costos de mantenimiento y despliegue
+
 ## ESCALABILIDAD
 
-#### ESCALABILIDAD VERTICAL
+### ESCALABILIDAD VERTICAL
 
 - El escalado vertical tiene mucho que ver con el **hardware del servidor** de la aplicación. Se consigue de una manera muy sencilla: **aumentando los recursos del servidor**. Principalmente, en lo que respecta a la capacidad de procesamiento, memoria y almacenamiento.
 - Este tipo de escalado es bastante **sencillo de alcanzar**, ya que únicamente requiere una intervención en el hardware del equipo, aumentando los recursos o incluso cambiando completamente de servidor. Sin embargo, el beneficio que se puede llegar a obtener también es limitado.
@@ -30,3 +67,7 @@
   - **Requiere mayor configuración, que puede llegar a ser difícil de realizar**. La implementación de la escalabilidad horizontal a menudo requiere una arquitectura específica y una configuración cuidadosa para garantizar un rendimiento óptimo.
   - **Necesidad de un diseño específico**. Necesita que la aplicación esté construida de modo que soporte escalabilidad vertical, lo que puede requerir modificaciones en el diseño original.
   - **Opción menos económica**. Aunque más potente y de mejor rendimiento, suele ser una opción menos económica, ya que requiere de varios servidores.
+
+## 🎯 IMPORTANTE
+
+- En programación existen múltiples herramientas, NO existen herramientas mejores o peores, el éxito de un proyecto depende de utilizar la mejor solución al problema que intentamos resolver.
