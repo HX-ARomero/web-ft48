@@ -1,14 +1,17 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TodosModule } from './todos/todos.module';
+import { MorganMiddleware } from './middlewares/morgan.middleware';
 
 @Module({
   imports: [UsersModule, TodosModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-  // Inyectable
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(MorganMiddleware).forRoutes('*');
+  }
 }

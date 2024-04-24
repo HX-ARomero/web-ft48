@@ -10,7 +10,8 @@
 - [Nest JS - Documentación Oficial](https://nestjs.com/)
 - [CLI - Command Line Interface](./XpertReadmes/NestJS-CLI.md)
 - [Configuración](./XpertReadmes/NestJS-Configuration.md)
-- [Decorators](./XpertReadmes/NestJS-Decorators.md)
+- [Decoradores (Decorators)](./XpertReadmes/NestJS-Decorators.md)
+- [Implementar Morgan en Nest JS](./XpertReadmes/NestJS-Morgan.md)
 
 ## 01 - Backend Architecture
 
