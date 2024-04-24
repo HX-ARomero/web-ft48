@@ -11,3 +11,8 @@ export class UsersController {
     return this.usersService.getUsers();
   }
 }
+
+//* Evalúa path y método HTTP
+//* Desestructurar información
+//* Ejecuta el servicio
+//* Da respuesta al usuario
