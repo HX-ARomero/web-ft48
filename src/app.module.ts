@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TodosModule } from './todos/todos.module';
 import { MorganMiddleware } from './middlewares/morgan.middleware';
+import { DateAdderInterceptor } from './interceptors/date-adder.interceptor';
 
 @Module({
   imports: [UsersModule, TodosModule],
@@ -11,7 +12,11 @@ import { MorganMiddleware } from './middlewares/morgan.middleware';
   providers: [{
     provide: AppService,
     useClass: AppService
-  }],
+  },
+  {
+    provide: 'APP_INTERCEPTOR',
+    useClass: DateAdderInterceptor,
+  },],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
