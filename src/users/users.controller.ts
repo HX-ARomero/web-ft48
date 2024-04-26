@@ -19,12 +19,16 @@ import { Request, Response } from 'express';
 import { User } from './interfaces/user.interface';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { DateAdderInterceptor } from 'src/interceptors/date-adder.interceptor';
+import { UsersDbService } from './users-db.service';
 
 // http://localhost:3000/users
 @Controller('users')
 // @UseGuards(AuthGuard)
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly usersDbService: UsersDbService,
+  ) {}
 
   // GET http://localhost:3000/users/?name=Lisa
   @Get()
@@ -57,7 +61,7 @@ export class UsersController {
   @Get('message')
   getMessage(
     @Res() response: Response,
-    @Req() request: Request & { now: string }
+    @Req() request: Request & { now: string },
   ) {
     response.status(202).send(`Se aceptó la solicitud el día ${request.now}`);
   }
@@ -92,12 +96,10 @@ export class UsersController {
 
   @Post()
   @UseInterceptors(DateAdderInterceptor)
-  createUser(
-    @Body() user: User,
-    @Req() request: Request & { now: string }
-  ) {
-    const modifiedUser = {...user, createdAt: request.now };
-    return this.usersService.createUser(modifiedUser);
+  createUser(@Body() user: User, @Req() request: Request & { now: string }) {
+    const modifiedUser = { ...user, createdAt: request.now };
+    //return this.usersService.createUser(modifiedUser);
+    return this.usersDbService.create(modifiedUser)
   }
 
   @Put()

@@ -3,6 +3,9 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { LoggerMiddleware } from 'src/middlewares/logger';
 import { UsersRepository } from './users.repository';
+import { UsersDbService } from './users-db.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './users.entity';
 
 const usersMockService = {
   getUsers: () => {
@@ -17,7 +20,7 @@ const usersMockService = {
 };
 
 @Module({
-  imports: [],
+  imports: [TypeOrmModule.forFeature([User])],
   controllers: [UsersController],
   providers: [
     {
@@ -42,6 +45,7 @@ const usersMockService = {
         return cleanUsers;
       },
     },
+    UsersDbService,
   ],
 })
 export class UsersModule implements NestModule {
