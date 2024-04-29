@@ -5,7 +5,10 @@ import {
   Get,
   Headers,
   HttpCode,
+  HttpException,
+  NotFoundException,
   Param,
+  ParseUUIDPipe,
   Post,
   Put,
   Query,
@@ -20,6 +23,7 @@ import { User } from './interfaces/user.interface';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { DateAdderInterceptor } from 'src/interceptors/date-adder.interceptor';
 import { UsersDbService } from './users-db.service';
+import { UsersBodyDto } from './users.dto';
 
 // http://localhost:3000/users
 @Controller('users')
@@ -88,18 +92,25 @@ export class UsersController {
   // http://localhost:3000/users/:id
   @Get(':id')
   // param = { id: 3, name: 'Marge' }
-  getUserById(@Param('id') id: string) {
-    const foundUser = this.usersService.getUserById(Number(id));
+  async getUserById(@Param('id', ParseUUIDPipe) id: string) {
+    const foundUser = await this.usersDbService.getUserById(id);
+    if (!foundUser)
+      throw new NotFoundException(`Usuario con id ${id} no encontrado`);
     if (foundUser) return foundUser;
     return 'No se encontró al usuario';
   }
 
   @Post()
   @UseInterceptors(DateAdderInterceptor)
-  createUser(@Body() user: User, @Req() request: Request & { now: string }) {
+  createUser(
+    @Body() user: UsersBodyDto,
+    @Req() request: Request & { now: string },
+  ) {
     const modifiedUser = { ...user, createdAt: request.now };
     //return this.usersService.createUser(modifiedUser);
-    return this.usersDbService.create(modifiedUser)
+    console.log('Body', request.body);
+    console.log('User', user);
+    return this.usersDbService.create(modifiedUser);
   }
 
   @Put()
@@ -109,7 +120,13 @@ export class UsersController {
 
   @Delete()
   deleteUser() {
-    return 'Esta ruta elimina un usuario';
+    throw new HttpException(
+      {
+        status: 501,
+        error: 'Esta ruta aún no está implementada',
+      },
+      501,
+    );
   }
 }
 

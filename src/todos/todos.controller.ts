@@ -1,4 +1,4 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, Param, UsePipes, ValidationPipe } from "@nestjs/common";
 import { TodosService } from "./todos.service";
 
 // http://localhost:3000/todos
@@ -9,6 +9,13 @@ export class TodosController {
   @Get()
   getTodos() {
     return this.todosService.getTodos();
+  }
+
+  @Get(':id')
+  @UsePipes(new ValidationPipe({ transform: true }))
+  getTodoById(@Param('id') id: number) {
+    console.log({ id, type: typeof id });
+    return `Retorna todo con id ${id}`;
   }
 
 }
