@@ -32,6 +32,10 @@ import { UsersBodyDto } from './users.dto';
 import { CloudinaryService } from './cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MinSizeValidatorPipe } from './minSizeValidator';
+import { AuthService } from './auth.service';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from 'src/role.enum';
+import { RolesGuard } from 'src/guards/roles.guard';
 
 // http://localhost:3000/users
 @Controller('users')
@@ -41,6 +45,7 @@ export class UsersController {
     private readonly usersService: UsersService,
     private readonly usersDbService: UsersDbService,
     private readonly cloudinaryService: CloudinaryService,
+    private readonly authService: AuthService,
   ) {}
 
   // GET http://localhost:3000/users/?name=Lisa
@@ -98,6 +103,13 @@ export class UsersController {
     return 'Estas son las fotos del usuario';
   }
 
+  @Get('dashboard')
+  @Roles(Role.Admin) //* 'admin'
+  @UseGuards(AuthGuard, RolesGuard)
+  getAdmin() {
+    return 'Datos del Panel de Administrador';
+  }
+
   // http://localhost:3000/users/:id
   @Get(':id')
   // param = { id: 3, name: 'Marge' }
@@ -109,6 +121,7 @@ export class UsersController {
     return 'No se encontró al usuario';
   }
 
+
   @Post()
   @UseInterceptors(DateAdderInterceptor)
   createUser(
@@ -119,7 +132,12 @@ export class UsersController {
     //return this.usersService.createUser(modifiedUser);
     console.log('Body', request.body);
     console.log('User', user);
-    return this.usersDbService.create(modifiedUser);
+    return this.authService.signUp(modifiedUser);
+  }
+
+  @Post('signin')
+  signIn(@Body() user: any) {
+    return this.authService.signIn(user.email, user.password);
   }
 
   @Post('profile/images')

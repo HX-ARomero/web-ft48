@@ -15,6 +15,9 @@ export class User {
   email: string;
 
   @Column()
+  password: string;
+
+  @Column()
   createdAt: string;
 
 }
