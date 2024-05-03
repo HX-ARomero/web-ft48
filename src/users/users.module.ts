@@ -1,12 +1,12 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
-import { LoggerMiddleware } from 'src/middlewares/logger';
+import { LoggerMiddleware } from '../middlewares/logger';
 import { UsersRepository } from './users.repository';
 import { UsersDbService } from './users-db.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users.entity';
-import { CloudinaryConfig } from 'src/config/cloudinary';
+import { CloudinaryConfig } from '../config/cloudinary';
 import { CloudinaryService } from './cloudinary.service';
 import { AuthService } from './auth.service';
 
