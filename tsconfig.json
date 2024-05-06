@@ -17,6 +17,8 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
+    "noUnusedLocals": false,
+    "resolveJsonModule": true,
     "types": ["multer", "jest"]
   }
 }

@@ -8,7 +8,7 @@
 
 ```
 
-> A continuación se detallan algunas buenas prácticas para la persona detrás del código, que también debe seguir algunas buenas prácticas.
+> Por último, describimos algunas buenas prácticas para la persona detrás del código, que también puede seguir algunas buenas prácticas.
 
 ## CUIDADO DE LA VISTA 👀
 

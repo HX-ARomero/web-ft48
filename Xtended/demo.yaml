@@ -1,0 +1,136 @@
+openapi: "3.0.0"
+paths:
+  "/":
+    get:
+      operationId: "AppController_getHello"
+      parameters: []
+      responses:
+        "200":
+          description: ""
+  "/todos":
+    get:
+      operationId: "TodosController_getTodos"
+      parameters: []
+      responses:
+        "200":
+          description: ""
+  "/todos/{id}":
+    get:
+      operationId: "TodosController_getTodoById"
+      parameters:
+        - name: "id"
+          required: true
+          in: "path"
+          schema:
+            type: "number"
+      responses:
+        "200":
+          description: ""
+  "/todos/upload":
+    post:
+      operationId: "TodosController_uploadFile"
+      parameters: []
+      responses:
+        "201":
+          description: ""
+  "/users/admin":
+    get:
+      operationId: "UsersController_getAdmin"
+      parameters: []
+      responses:
+        "200":
+          description: ""
+  "/users":
+    get:
+      operationId: "UsersController_getUsers"
+      parameters:
+        - name: "name"
+          required: true
+          in: "query"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: ""
+    post:
+      operationId: "UsersController_createUser"
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsersBodyDto"
+      responses:
+        "201":
+          description: ""
+    put:
+      operationId: "UsersController_updateUser"
+      parameters: []
+      responses:
+        "200":
+          description: ""
+    delete:
+      operationId: "UsersController_deleteUser"
+      parameters: []
+      responses:
+        "200":
+          description: ""
+  "/users/profile/images":
+    post:
+      operationId: "UsersController_uploadProfilePic"
+      parameters: []
+      responses:
+        "201":
+          description: ""
+    get:
+      operationId: "UsersController_getProfilePics"
+      parameters: []
+      responses:
+        "200":
+          description: ""
+  "/users/profile/name":
+    get:
+      operationId: "UsersController_getName"
+      parameters: []
+      responses:
+        "200":
+          description: ""
+  "/users/{id}":
+    get:
+      operationId: "UsersController_getUserById"
+      parameters:
+        - name: "id"
+          required: true
+          in: "path"
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: ""
+  "/users/coffee":
+    get:
+      operationId: "UsersController_getCoffee"
+      parameters: []
+      responses:
+        "418":
+          description: ""
+  "/users/signin":
+    post:
+      operationId: "UsersController_signIn"
+      parameters: []
+      responses:
+        "201":
+          description: ""
+info:
+  title: "Demo Nest"
+  description: "Esta es una API construída con Nest empleada como demo para el módulo 4 de la especialidad de la carrera Fullstack Developer de HENRY"
+  version: "1.0"
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    UsersBodyDto:
+      type: "object"
+      properties: {}

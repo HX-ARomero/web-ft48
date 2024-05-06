@@ -26,9 +26,10 @@ import { UsersService } from './users.service';
 import { Request, Response } from 'express';
 import { User } from './interfaces/user.interface';
 import { AuthGuard } from '../guards/auth.guard';
-import { DateAdderInterceptor } from '../interceptors/date-adder.interceptor';
+//* import { DateAdderInterceptor } from 'src/interceptors/date-adder.interceptor'; // RUTA RELATIVA
+import { DateAdderInterceptor } from '../interceptors/date-adder.interceptor'; //* RUTA ABSOLUTA
 import { UsersDbService } from './users-db.service';
-import { UsersBodyDto } from './users.dto';
+import { UsersBodyDto, UsersSignInDto } from './users.dto';
 import { CloudinaryService } from './cloudinary.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MinSizeValidatorPipe } from './minSizeValidator';
@@ -36,8 +37,10 @@ import { AuthService } from './auth.service';
 import { Roles } from '../decorators/roles.decorator';
 import { Role } from '../role.enum';
 import { RolesGuard } from '../guards/roles.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 // http://localhost:3000/users
+@ApiTags('users')
 @Controller('users')
 // @UseGuards(AuthGuard)
 export class UsersController {
@@ -97,17 +100,19 @@ export class UsersController {
     return 'Esta ruta devuelve solo el nombre del usuario';
   }
 
+  @ApiBearerAuth()
   @Get('profile/images')
   @UseGuards(AuthGuard)
   getProfilePics() {
     return 'Estas son las fotos del usuario';
   }
 
+  @ApiBearerAuth()
   @Get('dashboard')
   @Roles(Role.Admin) //* 'admin'
   @UseGuards(AuthGuard, RolesGuard)
   getAdmin() {
-    return 'Datos del Panel de Administrador';
+    return 'Datos del Panel de Administrador'; 
   }
 
   // http://localhost:3000/users/:id
@@ -136,7 +141,7 @@ export class UsersController {
   }
 
   @Post('signin')
-  signIn(@Body() user: any) {
+  signIn(@Body() user: UsersSignInDto) {
     return this.authService.signIn(user.email, user.password);
   }
 
