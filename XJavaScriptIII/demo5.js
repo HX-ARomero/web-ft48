@@ -1,0 +1,1 @@
+let array = new Array(-1);
