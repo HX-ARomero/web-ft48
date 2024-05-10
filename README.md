@@ -71,3 +71,7 @@
 ## 14 - JavaScript III
 
 - [Link al resumen de la Clase](./XpertReadmes/NestJS-14.md)
+
+## 15 - REPASO
+
+- [Link al resumen de la Clase](./XpertReadmes/NestJS-15.md)
